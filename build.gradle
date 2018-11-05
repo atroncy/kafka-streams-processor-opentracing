@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '4.0.2'
+}
+
+group 'com.github.atroncy'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.apache.kafka', name: 'kafka-streams', version: '2.0.0'
+
+    compile group: 'net.bytebuddy', name: 'byte-buddy', version: '1.8.0'
+    compile group: 'net.bytebuddy', name: 'byte-buddy-agent', version: '1.8.0'
+
+    compile group: 'io.opentracing', name: 'opentracing-api', version: '0.31.0'
+    compile group: 'io.opentracing', name: 'opentracing-util', version: '0.31.0'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar {
+    manifest {
+        attributes 'Premain-Class': 'com.github.atroncy.KafkaStreamsAgent'
+    }
+}
